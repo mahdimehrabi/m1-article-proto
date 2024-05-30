@@ -1,0 +1,55 @@
+syntax="proto3";
+
+package article.v1;
+
+service ArticleService{
+  rpc Create(Article) returns(ArticleCreateResponse){}
+  rpc Update(Article) returns(ArticleUpdateResponse){}
+  rpc Delete(ArticleID) returns(Empty){}
+  rpc Detail(ArticleID) returns(ArticleDetailResponse){}
+  rpc List(Pagination) returns(ArticleListResponse){}
+}
+
+message Empty {
+
+}
+
+enum ArticleCreateUpdateStatus{
+  SUCCESS=0;
+  TitleExist=1;
+  ValidationFailed=2;
+}
+
+message ArticleCreateResponse{
+  int64 ID=1;
+  ArticleCreateUpdateStatus Status=2;
+}
+
+message ArticleID {
+  int64 ID=1;
+}
+
+message Pagination{
+  uint32 Page=1;
+}
+
+message ArticleUpdateResponse {
+  ArticleCreateUpdateStatus Status=1;
+}
+
+message ArticleDetailResponse{
+  Article Article=1;
+}
+
+message ArticleListResponse{
+  repeated Article Article=1;
+}
+
+
+
+message Article {
+  int64 ID=1;
+  string Title=2; //unique
+  string Slug=3;
+  repeated string Tags=4;
+}
