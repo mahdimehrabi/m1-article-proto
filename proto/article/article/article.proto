@@ -14,15 +14,9 @@ message Empty {
 
 }
 
-enum ArticleCreateUpdateStatus{
-  SUCCESS=0;
-  TitleExist=1;
-  ValidationFailed=2;
-}
 
 message ArticleCreateResponse{
   int64 ID=1;
-  ArticleCreateUpdateStatus Status=2;
 }
 
 message ArticleID {
@@ -34,7 +28,6 @@ message Pagination{
 }
 
 message ArticleUpdateResponse {
-  ArticleCreateUpdateStatus Status=1;
 }
 
 message ArticleDetailResponse{
